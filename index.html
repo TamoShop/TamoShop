@@ -9,7 +9,7 @@
   .box{max-width:600px;margin:auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.08);}
   h2{margin-bottom:10px;}
   label{display:block;margin-top:15px;font-size:14px;}
-  input, select{width:100%;padding:10px;margin-top:5px;border:1px solid #ccc;border-radius:4px;font-size:14px;}
+  select,input{width:100%;padding:10px;margin-top:5px;border:1px solid #ccc;border-radius:4px;font-size:14px;}
   .btn{margin-top:20px;width:100%;padding:14px;background:#25D366;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;}
 </style>
 </head>
@@ -22,7 +22,12 @@
   <input id="nom" placeholder="Votre nom complet" required>
 
   <label>Produit *</label>
-  <input id="produit" placeholder="Nom du produit ou variation" required>
+  <select id="produit" required>
+    <option value="">Choisir un produit</option>
+    <option value="Produit A" data-prix="1000">Produit A – 1000 DA</option>
+    <option value="Produit B" data-prix="1500">Produit B – 1500 DA</option>
+    <option value="Produit C" data-prix="2000">Produit C – 2000 DA</option>
+  </select>
 
   <label>Numéro de téléphone *</label>
   <input id="tel" placeholder="05xxxxxxxx" required>
@@ -105,32 +110,31 @@
 <script>
 function sendOrder(){
   const nom = document.getElementById('nom').value.trim();
-  const produit = document.getElementById('produit').value.trim();
+  const produitSelect = document.getElementById('produit');
+  const produit = produitSelect.value;
   const tel = document.getElementById('tel').value.trim();
   const wilaya = document.getElementById('wilaya').value;
   const qte = parseInt(document.getElementById('qte').value);
 
-  // Validation des champs
   if(!nom || !produit || !tel || !wilaya || !qte){
     alert("⚠️ Veuillez remplir tous les champs obligatoires !");
     return;
   }
 
-  // Prix fixe par produit (à adapter selon tes produits)
-  const prixUnitaire = 1000; 
+  // Récupérer le prix automatiquement depuis l'option sélectionnée
+  const prixUnitaire = parseInt(produitSelect.selectedOptions[0].dataset.prix);
   const prix = qte * prixUnitaire;
 
-  // Lien Google Apps Script Web App
-  const urlSheet = "COLLE_ICI_TON_WEB_APP_URL"; // remplace par ton lien Web App
+  // URL Web App Google Sheet
+  const urlSheet = "COLLE_ICI_TON_WEB_APP_URL"; // remplace par ton lien
 
-  // Envoi des données
   fetch(`${urlSheet}?nom=${encodeURIComponent(nom)}&produit=${encodeURIComponent(produit)}&tel=${encodeURIComponent(tel)}&wilaya=${encodeURIComponent(wilaya)}&qte=${qte}&prix=${prix}`)
     .then(response => response.text())
     .then(data => {
       alert("✅ Commande envoyée !");
-      // Reset du formulaire
+      // Reset formulaire
       document.getElementById('nom').value = "";
-      document.getElementById('produit').value = "";
+      document.getElementById('produit').selectedIndex = 0;
       document.getElementById('tel').value = "";
       document.getElementById('wilaya').selectedIndex = 0;
       document.getElementById('qte').selectedIndex = 0;
