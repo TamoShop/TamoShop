@@ -126,33 +126,28 @@
 <script>
 function sendOrder(){
   const nom = document.getElementById('nom').value.trim();
-  const produitSelect = document.getElementById('produit');
-  const produit = produitSelect.value;
   const tel = document.getElementById('tel').value.trim();
   const wilaya = document.getElementById('wilaya').value;
-  const qte = parseInt(document.getElementById('qte').value);
+  const livraison = document.getElementById('livraison').value;
+  const qte = document.getElementById('qte').value;
 
-  if(!nom || !produit || !tel || !wilaya || !qte){
+  if(!nom || !tel || !wilaya || !livraison || !qte){
     alert("⚠️ Veuillez remplir tous les champs obligatoires !");
     return;
   }
 
-  // Récupérer le prix automatiquement depuis l'option sélectionnée
-  const prixUnitaire = parseInt(produitSelect.selectedOptions[0].dataset.prix);
-  const prix = qte * prixUnitaire;
+  const prix = 0; // ou mets un prix fixe si tu veux
 
-  // URL Web App Google Sheet
-  const urlSheet = "https://script.google.com/macros/s/AKfycbzIjcGDrdVo6aaIzuRQ7C_S7Incrq0C8rj9yUVYuYq2QQ-YaGWV2CWkPQ0gi2RxHdA1/exec"; // remplace par ton lien
+  const urlSheet = "https://script.google.com/macros/s/AKfycbzIjcGDrdVo6aaIzuRQ7C_S7Incrq0C8rj9yUVYuYq2QQ-YaGWV2CWkPQ0gi2RxHdA1/exec";
 
-  fetch(`${urlSheet}?nom=${encodeURIComponent(nom)}&produit=${encodeURIComponent(produit)}&tel=${encodeURIComponent(tel)}&wilaya=${encodeURIComponent(wilaya)}&qte=${qte}&prix=${prix}`)
-    .then(response => response.text())
-    .then(data => {
+  fetch(`${urlSheet}?nom=${encodeURIComponent(nom)}&tel=${encodeURIComponent(tel)}&wilaya=${encodeURIComponent(wilaya)}&livraison=${encodeURIComponent(livraison)}&qte=${qte}&prix=${prix}`)
+    .then(r => r.text())
+    .then(() => {
       alert("✅ Commande envoyée !");
-      // Reset formulaire
       document.getElementById('nom').value = "";
-      document.getElementById('produit').selectedIndex = 0;
       document.getElementById('tel').value = "";
       document.getElementById('wilaya').selectedIndex = 0;
+      document.getElementById('livraison').selectedIndex = 0;
       document.getElementById('qte').selectedIndex = 0;
     })
     .catch(err => alert("Erreur: " + err));
