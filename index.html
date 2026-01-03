@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Commande – RoulTamo</title>
+<title>Commande – TamoShop</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   body{font-family:Arial, Helvetica, sans-serif;background:#f2f4f7;padding:20px;}
@@ -22,70 +22,87 @@
   <input id="nom" placeholder="Votre nom complet" required>
   </select>
 
-  <label>Numéro de téléphone *</label>
-  <input id="tel" placeholder="05xxxxxxxx" required>
+  <label>Numéro de téléphone/رقم الهاتف *</label>
+  <input id="tel" placeholder="0xxxxxxxxx" required>
 
-  <label>Wilaya *</label>
   <select id="wilaya" required>
     <option value="">Choisir</option>
-    <option>Adrar</option>
-    <option>Chlef</option>
-    <option>Laghouat</option>
-    <option>Oum El Bouaghi</option>
-    <option>Batna</option>
-    <option>Béjaïa</option>
-    <option>Biskra</option>
-    <option>Béchar</option>
-    <option>Blida</option>
-    <option>Bouira</option>
-    <option>Tamanrasset</option>
-    <option>Tébessa</option>
-    <option>Tlemcen</option>
-    <option>Tiaret</option>
-    <option>Tizi Ouzou</option>
-    <option>Alger</option>
-    <option>Djelfa</option>
-    <option>Jijel</option>
-    <option>Sétif</option>
-    <option>Saïda</option>
-    <option>Skikda</option>
-    <option>Sidi Bel Abbès</option>
-    <option>Annaba</option>
-    <option>Guelma</option>
-    <option>Constantine</option>
-    <option>Médéa</option>
-    <option>Mostaganem</option>
-    <option>M'Sila</option>
-    <option>Mascara</option>
-    <option>Ouargla</option>
-    <option>Oran</option>
-    <option>El Bayadh</option>
-    <option>Illizi</option>
-    <option>Bordj Bou Arreridj</option>
-    <option>Boumerdès</option>
-    <option>El Tarf</option>
-    <option>Tindouf</option>
-    <option>Tissemsilt</option>
-    <option>El Oued</option>
-    <option>Khenchela</option>
-    <option>Souk Ahras</option>
-    <option>Tipaza</option>
-    <option>Mila</option>
-    <option>Aïn Defla</option>
-    <option>Naâma</option>
-    <option>Aïn Témouchent</option>
-    <option>Ghardaïa</option>
-    <option>Relizane</option>
-    <option>Timimoun</option>
-    <option>Bordj Badji Mokhtar</option>
-    <option>Ouled Djellal</option>
-    <option>Béni Abbès</option>
-    <option>In Salah</option>
-    <option>In Guezzam</option>
-    <option>Touggourt</option>
-    <option>Djanet</option>
-    <option>El M'Ghair</option>
-    <option>El Meniaa</option>
+    <option>1:Adrar/أدرار</option>
+    <option>2:Chlef/الشلف</option>
+    <option>3:Laghouat/الأغواط</option>
+    <option>4:Oum El Bouaghi/أم البواقي</option>
+    <option>5:Batna/باتنة</option>
+    <option>6:Béjaïa/بجاية</option>
+    <option>7:Biskra/بسكرة</option>
+    <option>8:Béchar/بشار</option>
+    <option>9:Blida/البليدة</option>
+    <option>10:Bouira/البويرة</option>
+    <option>11:Tamanrasset/تمنراست</option>
+    <option>12:Tébessa/تبسة</option>
+    <option>13:Tlemcen/تلمسان</option>
+    <option>14:Tiaret/تيارت</option>
+    <option>15:Tizi Ouzou/تيزي وزو</option>
+    <option>16:Alger/الجزائر العاصمة</option>
+    <option>17:Djelfa/الجلفة</option>
+    <option>18:Jijel/جيجل</option>
+    <option>19:Sétif/سطيف</option>
+    <option>20:Saïda/سعيدة</option>
+    <option>21:Skikda/سكيكدة</option>
+    <option>22:Sidi Bel Abbès/سيدي بلعباس</option>
+    <option>23:Annaba/عنابة</option>
+    <option>24:Guelma/قالمة</option>
+    <option>25:Constantine/قسنطينة</option>
+    <option>26:Médéa/المدية</option>
+    <option>27:Mostaganem/مستغانم</option>
+    <option>28:M'Sila/المسيلة</option>
+    <option>29:Mascara/معسكر</option>
+    <option>30:Ouargla/ورقلة</option>
+    <option>31:Oran/وهران</option>
+    <option>32:El Bayadh/البيض</option>
+    <option>33:Illizi/إليزي</option>
+    <option>34:Bordj Bou Arreridj/برج بوعريريج</option>
+    <option>35:Boumerdès/بومرداس</option>
+    <option>36:El Tarf/الطارف</option>
+    <option>37:Tindouf/تندوف</option>
+    <option>38:Tissemsilt/تيسمسيلت</option>
+    <option>39:El Oued/الوادي</option>
+    <option>40:Khenchela/خنشلة</option>
+    <option>41:Souk Ahras/سوق أهراس</option>
+    <option>42:Tipaza/تيبازة</option>
+    <option>43:Mila/ميلة</option>
+    <option>44:Aïn Defla/عين الدفلى</option>
+    <option>45:Naâma/النعامة</option>
+    <option>46:Aïn Témouchent/عين تموشنت</option>
+    <option>47:Ghardaïa/غرداية</option>
+    <option>48:Relizane/غليزان</option>
+    <option>49:Timimoun/تيميمون</option>
+    <option>50:Bordj Badji Mokhtar/برج باجي مختار</option>
+    <option>51:Ouled Djellal/أولاد جلال</option>
+    <option>52:Béni Abbès/بني عباس</option>
+    <option>53:In Salah/عين صالح</option>
+    <option>54:In Guezzam/عين قزام</option>
+    <option>55:Touggourt/تقرت</option>
+    <option>56:Djanet/ جانت</option>
+    <option>57:El M'Ghair/المغير</option>
+    <option>58:El Meniaa/ المنيعة</option>
+    <option>59:Aflou/آفلو</option>
+    <option>60:Barika/بريكة</option>
+    <option>61:Kantara/القنطرة</option>
+    <option>62:Bir el-Ater/بير العاتر</option>
+    <option>63:El Aricha/العريشة</option>
+    <option>64:Ksar Chellala/قصر الشلالة</option>
+    <option>65:Aïn Oussera/عين وسارة</option>
+    <option>66:Messaad/مسعد</option>
+    <option>67:Ksar El Boukhari/قصر البخاري</option>
+    <option>68:Bou Saâda/بوسعادة</option>
+    <option>69:El Abiodh Sidi Cheikh/الأبيض سيدي الشيخ</option>
+  </select>
+
+  <label>Type de livraison *</label>
+  <select id="Livraison" required>
+  <option value="">Choisir la livraison</option>
+  <option value="Livraison à domicile">Livraison à domicile</option>
+  <option value="Retrait au bureau">Retrait au bureau</option>
   </select>
 
   <label>Quantité *</label>
