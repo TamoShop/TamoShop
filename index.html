@@ -106,6 +106,13 @@
   <option value="Retrait au bureau">Retrait au bureau</option>
   </select>
 
+  <label>Produit *</label>
+<select id="produit" required>
+  <option value="">Choisir un produit</option>
+  <option value="ANKER R50I NC" data-prix="4750">ANKER R50I NC</option>
+  <option value="HOCO EQ6" data-prix="2600">HOCO EQ6</option>
+</select>
+
   <label>Quantité *</label>
   <select id="qte" required>
     <option value="1">1</option>
@@ -129,25 +136,37 @@ function sendOrder(){
   const tel = document.getElementById('tel').value.trim();
   const wilaya = document.getElementById('wilaya').value;
   const livraison = document.getElementById('livraison').value;
+  const produit = document.getElementById('produit').value;
   const qte = document.getElementById('qte').value;
+  
+  const produitSelect = document.getElementById('produit');
+  const produit = produitSelect.value;
 
-  if(!nom || !tel || !wilaya || !livraison || !qte){
-    alert("⚠️ Veuillez remplir tous les champs obligatoires !");
-    return;
+  const prixUnitaire = parseInt(
+    produitSelect.selectedOptions[0].dataset.prix
+  );
+
+  const qte = parseInt(document.getElementById('qte').value);
+  const prix = prixUnitaire * qte;
+
+ if(!nom || !tel || !wilaya || !livraison || !produit || !qte){
+   alert("⚠️ Veuillez remplir tous les champs obligatoires !");
+   return;
+}
+
   }
 
-  const prix = 4750; // ou mets un prix fixe si tu veux
+  const urlSheet = "https://script.google.com/macros/s/AKfycbzZbh475Omxj7VfpR3ZsFcUGr72IYR5knXGkRZkWW-BbL0Sy7TL5o5cuYuR9ooRY-uq/exec";
 
-  const urlSheet = "https://script.google.com/macros/s/AKfycbzIjcGDrdVo6aaIzuRQ7C_S7Incrq0C8rj9yUVYuYq2QQ-YaGWV2CWkPQ0gi2RxHdA1/exec";
-
-  fetch(`${urlSheet}?nom=${encodeURIComponent(nom)}&tel=${encodeURIComponent(tel)}&wilaya=${encodeURIComponent(wilaya)}&livraison=${encodeURIComponent(livraison)}&qte=${qte}&prix=${prix}`)
+  ffetch(`${urlSheet}?nom=${encodeURIComponent(nom)}&tel=${encodeURIComponent(tel)}&wilaya=${encodeURIComponent(wilaya)}&livraison=${encodeURIComponent(livraison)}&produit=${encodeURIComponent(produit)}&qte=${qte}&prix=${prix}`)
     .then(r => r.text())
-    .then(() => {
+    .then(() => alert("✅ Commande envoyée !"))
       alert("✅ Commande envoyée !");
       document.getElementById('nom').value = "";
       document.getElementById('tel').value = "";
       document.getElementById('wilaya').selectedIndex = 0;
       document.getElementById('livraison').selectedIndex = 0;
+      document.getElementById('produit').selectedIndex = 0;
       document.getElementById('qte').selectedIndex = 0;
     })
     .catch(err => alert("Erreur: " + err));
