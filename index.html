@@ -1,170 +1,141 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<title>Commande – TamoShop</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إتمام الطلب</title>
+
 <style>
-  body{font-family:Arial, Helvetica, sans-serif;background:#f2f4f7;padding:20px;}
-  .box{max-width:600px;margin:auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.08);}
-  h2{margin-bottom:10px;}
-  label{display:block;margin-top:15px;font-size:14px;}
-  select,input{width:100%;padding:10px;margin-top:5px;border:1px solid #ccc;border-radius:4px;font-size:14px;}
-  .btn{margin-top:20px;width:100%;padding:14px;background:#25D366;color:#fff;border:none;border-radius:6px;font-size:16px;font-weight:bold;cursor:pointer;}
+*{box-sizing:border-box;font-family:Tahoma,Arial,sans-serif}
+body{margin:0;background:#0f1115;color:#fff}
+.checkout-container{max-width:1100px;margin:40px auto;display:flex;gap:20px;padding:10px}
+.cart,.form{background:#1a1d24;border-radius:12px;padding:20px;width:50%}
+h3{margin-bottom:20px;font-size:18px}
+.product{display:flex;gap:12px;align-items:center;margin-bottom:20px}
+.product img{width:60px;border-radius:8px}
+.summary div{display:flex;justify-content:space-between;margin:10px 0}
+.total{color:#4ea1ff;font-weight:bold}
+.confirm-btn{margin-top:20px;width:100%;padding:14px;border:none;border-radius:10px;
+background:linear-gradient(90deg,#3b82f6,#22c55e);color:#fff;font-size:16px;cursor:pointer}
+input,select,textarea{width:100%;padding:12px;margin-bottom:12px;border-radius:8px;border:none;
+background:#0f1115;color:#fff;outline:none}
+.row{display:flex;gap:10px}
+textarea{resize:none;height:80px}
+@media(max-width:900px){
+.checkout-container{flex-direction:column}
+.cart,.form{width:100%}
+}
 </style>
 </head>
+
 <body>
 
-<div class="box">
-  <h2>Commande / الطلب</h2>
+<form onsubmit="sendOrder(event)">
+<div class="checkout-container">
 
-  <label>Nom complet *</label>
-  <input id="nom" placeholder="Votre nom complet" required>
-  </select>
+<!-- سلة التسوق -->
+<div class="cart">
+<h3>🛒 سلة التسوق</h3>
 
-  <label>Numéro de téléphone/رقم الهاتف *</label>
-  <input id="tel" placeholder="0xxxxxxxxx" required>
-  </select>
-  
-  <label>Wilaya/الولاية *</label>
-  <select id="wilaya" required>
-    <option value="">Choisir</option>
-    <option>1:Adrar/أدرار</option>
-    <option>2:Chlef/الشلف</option>
-    <option>3:Laghouat/الأغواط</option>
-    <option>4:Oum El Bouaghi/أم البواقي</option>
-    <option>5:Batna/باتنة</option>
-    <option>6:Béjaïa/بجاية</option>
-    <option>7:Biskra/بسكرة</option>
-    <option>8:Béchar/بشار</option>
-    <option>9:Blida/البليدة</option>
-    <option>10:Bouira/البويرة</option>
-    <option>11:Tamanrasset/تمنراست</option>
-    <option>12:Tébessa/تبسة</option>
-    <option>13:Tlemcen/تلمسان</option>
-    <option>14:Tiaret/تيارت</option>
-    <option>15:Tizi Ouzou/تيزي وزو</option>
-    <option>16:Alger/الجزائر العاصمة</option>
-    <option>17:Djelfa/الجلفة</option>
-    <option>18:Jijel/جيجل</option>
-    <option>19:Sétif/سطيف</option>
-    <option>20:Saïda/سعيدة</option>
-    <option>21:Skikda/سكيكدة</option>
-    <option>22:Sidi Bel Abbès/سيدي بلعباس</option>
-    <option>23:Annaba/عنابة</option>
-    <option>24:Guelma/قالمة</option>
-    <option>25:Constantine/قسنطينة</option>
-    <option>26:Médéa/المدية</option>
-    <option>27:Mostaganem/مستغانم</option>
-    <option>28:M'Sila/المسيلة</option>
-    <option>29:Mascara/معسكر</option>
-    <option>30:Ouargla/ورقلة</option>
-    <option>31:Oran/وهران</option>
-    <option>32:El Bayadh/البيض</option>
-    <option>33:Illizi/إليزي</option>
-    <option>34:Bordj Bou Arreridj/برج بوعريريج</option>
-    <option>35:Boumerdès/بومرداس</option>
-    <option>36:El Tarf/الطارف</option>
-    <option>37:Tindouf/تندوف</option>
-    <option>38:Tissemsilt/تيسمسيلت</option>
-    <option>39:El Oued/الوادي</option>
-    <option>40:Khenchela/خنشلة</option>
-    <option>41:Souk Ahras/سوق أهراس</option>
-    <option>42:Tipaza/تيبازة</option>
-    <option>43:Mila/ميلة</option>
-    <option>44:Aïn Defla/عين الدفلى</option>
-    <option>45:Naâma/النعامة</option>
-    <option>46:Aïn Témouchent/عين تموشنت</option>
-    <option>47:Ghardaïa/غرداية</option>
-    <option>48:Relizane/غليزان</option>
-    <option>49:Timimoun/تيميمون</option>
-    <option>50:Bordj Badji Mokhtar/برج باجي مختار</option>
-    <option>51:Ouled Djellal/أولاد جلال</option>
-    <option>52:Béni Abbès/بني عباس</option>
-    <option>53:In Salah/عين صالح</option>
-    <option>54:In Guezzam/عين قزام</option>
-    <option>55:Touggourt/تقرت</option>
-    <option>56:Djanet/ جانت</option>
-    <option>57:El M'Ghair/المغير</option>
-    <option>58:El Meniaa/ المنيعة</option>
-    <option>59:Aflou/آفلو</option>
-    <option>60:Barika/بريكة</option>
-    <option>61:Kantara/القنطرة</option>
-    <option>62:Bir el-Ater/بير العاتر</option>
-    <option>63:El Aricha/العريشة</option>
-    <option>64:Ksar Chellala/قصر الشلالة</option>
-    <option>65:Aïn Oussera/عين وسارة</option>
-    <option>66:Messaad/مسعد</option>
-    <option>67:Ksar El Boukhari/قصر البخاري</option>
-    <option>68:Bou Saâda/بوسعادة</option>
-    <option>69:El Abiodh Sidi Cheikh/الأبيض سيدي الشيخ</option>
-  </select>
-
-  <label>Type de livraison *</label>
-  <select id="livraison" required>
-  <option value="">Choisir la livraison</option>
-  <option value="Livraison à domicile">Livraison à domicile</option>
-  <option value="Retrait au bureau">Retrait au bureau</option>
-  </select>
-
-  <label>Quantité *</label>
-  <select id="qte" required>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-  </select>
-
-  <button class="btn" onclick="sendOrder()">Confirmer</button>
+<div class="product">
+<img src="product.jpg">
+<div>
+<div>ANKER R50 NC</div>
+<small>DZD 4,750</small>
 </div>
-  
-<script>
-// Définir le rôle de l'utilisateur : "acheteur" ou "vendeur"
-const roleUtilisateur = 'acheteur'; // changer à 'vendeur' si c'est toi
+</div>
 
-// Masquer les produits privés pour l'acheteur
-document.querySelectorAll('#produit option').forEach(option => {
-    if(option.dataset.visible === 'private' && roleUtilisateur === 'acheteur'){
-        option.style.display = 'none';
-    }
-});
+<div class="summary">
+<div><span>المجموع</span><span>4750 DZD</span></div>
+<div><span>التوصيل</span><span>0.00</span></div>
+<div class="total"><span>الإجمالي</span><span>4750 DZD</span></div>
+</div>
 
-<script>
-function sendOrder(){
-  const nom = document.getElementById('nom').value.trim();
-  const tel = document.getElementById('tel').value.trim();
-  const wilaya = document.getElementById('wilaya').value;
-  const livraison = document.getElementById('livraison').value;
-  const produit = document.getElementById('produit').value;
-  const qte = document.getElementById('qte').value;
+<input type="hidden" name="product" value="ANKER R50 NC">
+<input type="hidden" name="price" value="4750">
 
-   if(!nom || !tel || !wilaya || !livraison || !produit || !qte){
-   alert("⚠️ Veuillez remplir tous les champs obligatoires !");
-   return;
-}
+<button class="confirm-btn">تأكيد الطلب</button>
+</div>
 
-  const urlSheet = "https://script.google.com/macros/s/AKfycbzZbh475Omxj7VfpR3ZsFcUGr72IYR5knXGkRZkWW-BbL0Sy7TL5o5cuYuR9ooRY-uq/exec";
+<!-- بيانات الزبون -->
+<div class="form">
+<h3>📋 بيانات الزبون</h3>
 
-  fetch(`${urlSheet}?nom=${encodeURIComponent(nom)}&tel=${encodeURIComponent(tel)}&wilaya=${encodeURIComponent(wilaya)}&livraison=${encodeURIComponent(livraison)}&produit=${encodeURIComponent(produit)}&qte=${qte}&prix=${prix}`)
-    .then(r => r.text())
-    .then(() => {
-  alert("✅ Commande envoyée !");
-  document.getElementById('nom').value = "";
-  document.getElementById('tel').value = "";
-  document.getElementById('wilaya').selectedIndex = 0;
-  document.getElementById('livraison').selectedIndex = 0;
-  document.getElementById('produit').selectedIndex = 0;
-  document.getElementById('qte').selectedIndex = 0;
-})
-    .catch(err => alert("Erreur: " + err));
-}
-</script>
+<input name="name" type="text" placeholder="الاسم الكامل" required>
+<input name="phone" type="tel" placeholder="رقم الهاتف" required>
 
-</body>
-</html>
+<div class="row">
+
+<select name="wilaya" required>
+<option value="">الولاية</option>
+<option>01 - أدرار</option>
+<option>02 - الشلف</option>
+<option>03 - الأغواط</option>
+<option>04 - أم البواقي</option>
+<option>05 - باتنة</option>
+<option>06 - بجاية</option>
+<option>07 - بسكرة</option>
+<option>08 - بشار</option>
+<option>09 - البليدة</option>
+<option>10 - البويرة</option>
+<option>11 - تمنراست</option>
+<option>12 - تبسة</option>
+<option>13 - تلمسان</option>
+<option>14 - تيارت</option>
+<option>15 - تيزي وزو</option>
+<option>16 - الجزائر</option>
+<option>17 - الجلفة</option>
+<option>18 - جيجل</option>
+<option>19 - سطيف</option>
+<option>20 - سعيدة</option>
+<option>21 - سكيكدة</option>
+<option>22 - سيدي بلعباس</option>
+<option>23 - عنابة</option>
+<option>24 - قالمة</option>
+<option>25 - قسنطينة</option>
+<option>26 - المدية</option>
+<option>27 - مستغانم</option>
+<option>28 - المسيلة</option>
+<option>29 - معسكر</option>
+<option>30 - ورقلة</option>
+<option>31 - وهران</option>
+<option>32 - البيض</option>
+<option>33 - إليزي</option>
+<option>34 - برج بوعريريج</option>
+<option>35 - بومرداس</option>
+<option>36 - الطارف</option>
+<option>37 - تندوف</option>
+<option>38 - تيسمسيلت</option>
+<option>39 - الوادي</option>
+<option>40 - خنشلة</option>
+<option>41 - سوق أهراس</option>
+<option>42 - تيبازة</option>
+<option>43 - ميلة</option>
+<option>44 - عين الدفلى</option>
+<option>45 - النعامة</option>
+<option>46 - عين تموشنت</option>
+<option>47 - غرداية</option>
+<option>48 - غليزان</option>
+<option>49 - تيميمون</option>
+<option>50 - برج باجي مختار</option>
+<option>51 - أولاد جلال</option>
+<option>52 - بني عباس</option>
+<option>53 - عين صالح</option>
+<option>54 - عين قزام</option>
+<option>55 - تقرت</option>
+<option>56 - جانت</option>
+<option>57 - المغير</option>
+<option>58 - المنيعة</option>
+</select>
+
+<select name="daira" required>
+<option value="">الدائرة</option>
+</select>
+
+</div>
+
+<input name="address" type="text" placeholder="العنوان الكامل" required>
+
+<select name="payment">
+<option>الدفع عند الاستلام</option>
+</select>
