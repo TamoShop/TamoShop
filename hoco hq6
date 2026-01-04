@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>إتمام الطلب - HOCO EQ6</title>
+
+<style>
+*{box-sizing:border-box;font-family:Tahoma,Arial,sans-serif}
+body{margin:0;background:#0f1115;color:#fff}
+.checkout-container{max-width:1100px;margin:40px auto;display:flex;gap:20px;padding:10px}
+.cart,.form{background:#1a1d24;border-radius:12px;padding:20px;width:50%}
+h3{margin-bottom:20px;font-size:18px}
+.summary div{display:flex;justify-content:space-between;margin:10px 0}
+.total{color:#4ea1ff;font-weight:bold}
+.confirm-btn{margin-top:20px;width:100%;padding:14px;border:none;border-radius:10px;
+background:linear-gradient(90deg,#3b82f6,#22c55e);color:#fff;font-size:16px;cursor:pointer}
+input,select,textarea{width:100%;padding:12px;margin-bottom:12px;border-radius:8px;border:none;
+background:#0f1115;color:#fff;outline:none}
+.row{display:flex;gap:10px}
+.qty{width:80px;text-align:center}
+textarea{resize:none;height:80px}
+@media(max-width:900px){
+.checkout-container{flex-direction:column}
+.cart,.form{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<form onsubmit="sendOrder(event)">
+<div class="checkout-container">
+
+<!-- Système de commande -->
+<div class="cart">
+<h3>🛒 سلة التسوق</h3>
+
+<div class="product">
+  <div><strong>HOCO EQ6</strong></div>
+  <div>السعر للوحدة: <strong><span id="unitPrice">2600</span> DZD</strong></div>
+</div>
+
+<label>الكمية المطلوبة</label>
+<input type="number" id="qty" class="qty" min="1" value="1" required oninput="updateTotal()">
+
+<div class="summary">
+<div><span>المجموع</span><span id="subtotal">2600 DZD</span></div>
+<div><span>التوصيل</span><span>0.00</span></div>
+<div class="total"><span>الإجمالي</span><span id="total">2600 DZD</span></div>
+</div>
+
+<input type="hidden" name="product" id="productName" value="HOCO EQ6">
+<input type="hidden" name="price" id="finalPrice" value="2600">
+
+<button class="confirm-btn">تأكيد الطلب</button>
+</div>
+
+<!-- Données du client -->
+<div class="form">
+<h3>📋 بيانات الزبون</h3>
+
+<input name="name" type="text" placeholder="الاسم الكامل" required>
+<input name="phone" type="tel" placeholder="رقم الهاتف" required>
+
+<div class="row">
+<select name="wilaya" required>
+<option value="">الولاية</option>
+<option>01 - أدرار</option>
+<option>02 - الشلف</option>
+<option>03 - الأغواط</option>
+<option>04 - أم البواقي</option>
+<option>05 - باتنة</option>
+<option>06 - بجاية</option>
+<option>07 - بسكرة</option>
+<option>08 - بشار</option>
+<option>09 - البليدة</option>
+<option>10 - البويرة</option>
+<option>11 - تمنراست</option>
+<option>12 - تبسة</option>
+<option>13 - تلمسان</option>
+<option>14 - تيارت</option>
+<option>15 - تيزي وزو</option>
+<option>16 - الجزائر</option>
+<option>17 - الجلفة</option>
+<option>18 - جيجل</option>
+<option>19 - سطيف</option>
+<option>20 - سعيدة</option>
+<option>21 - سكيكدة</option>
+<option>22 - سيدي بلعباس</option>
+<option>23 - عنابة</option>
+<option>24 - قالمة</option>
+<option>25 - قسنطينة</option>
+<option>26 - المدية</option>
+<option>27 - مستغانم</option>
+<option>28 - المسيلة</option>
+<option>29 - معسكر</option>
+<option>30 - ورقلة</option>
+<option>31 - وهران</option>
+<option>32 - البيض</option>
+<option>33 - إليزي</option>
+<option>34 - برج بوعريريج</option>
+<option>35 - بومرداس</option>
+<option>36 - الطارف</option>
+<option>37 - تندوف</option>
+<option>38 - تيسمسيلت</option>
+<option>39 - الوادي</option>
+<option>40 - خنشلة</option>
+<option>41 - سوق أهراس</option>
+<option>42 - تيبازة</option>
+<option>43 - ميلة</option>
+<option>44 - عين الدفلى</option>
+<option>45 - النعامة</option>
+<option>46 - عين تموشنت</option>
+<option>47 - غرداية</option>
+<option>48 - غليزان</option>
+<option>49 - تيميمون</option>
+<option>50 - برج باجي مختار</option>
+<option>51 - أولاد جلال</option>
+<option>52 - بني عباس</option>
+<option>53 - عين صالح</option>
+<option>54 - عين قزام</option>
+<option>55 - تقرت</option>
+<option>56 - جانت</option>
+<option>57 - المغير</option>
+<option>58 - المنيعة</option>
+</select>
+
+</div>
+
+<input name="address" type="text" placeholder="العنوان الكامل" required>
+<textarea name="note" placeholder="ملاحظات (اختياري)"></textarea>
+</div>
+
+</div>
+</form>
+
+<script>
+const unitPrice = 2600;
+
+function updateTotal(){
+  const qty = parseInt(document.getElementById('qty').value) || 1;
+  const total = unitPrice * qty;
+
+  document.getElementById('subtotal').innerText = total + " DZD";
+  document.getElementById('total').innerText = total + " DZD";
+  document.getElementById('finalPrice').value = total;
+}
+
+function sendOrder(e){
+  e.preventDefault();
+  const f = e.target;
+  const qty = document.getElementById('qty').value;
+
+  const data = {
+    product: f.product.value,
+    qty: qty,
+    price: f.price.value,
+    name: f.name.value,
+    phone: f.phone.value,
+    wilaya: f.wilaya.value,
+    address: f.address.value,
+    note: f.note.value || ''
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbyHT8Q-0GSRMBaO63gIWlj5bZ2HTNNTdZHMzps14RI5CACYgc4PCx2-mjx2jjARHFmi/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    alert("✅ تم تسجيل الطلب بنجاح، سنتصل بك قريبًا");
+    f.reset();
+    document.getElementById('subtotal').innerText = unitPrice + " DZD";
+    document.getElementById('total').innerText = unitPrice + " DZD";
+  })
+  .catch(() => {
+    alert("❌ حدث خطأ، حاول مرة أخرى");
+  });
+}
+</script>
+
+</body>
+</html>
