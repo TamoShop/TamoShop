@@ -11,8 +11,7 @@ body{margin:0;background:#0f1115;color:#fff}
 .checkout-container{max-width:1100px;margin:40px auto;display:flex;gap:20px;padding:10px}
 .cart,.form{background:#1a1d24;border-radius:12px;padding:20px;width:50%}
 h3{margin-bottom:20px;font-size:18px}
-.product{display:flex;gap:12px;align-items:center;margin-bottom:20px}
-.product img{width:60px;border-radius:8px}
+.product{margin-bottom:20px}
 .summary div{display:flex;justify-content:space-between;margin:10px 0}
 .total{color:#4ea1ff;font-weight:bold}
 .confirm-btn{margin-top:20px;width:100%;padding:14px;border:none;border-radius:10px;
@@ -20,6 +19,7 @@ background:linear-gradient(90deg,#3b82f6,#22c55e);color:#fff;font-size:16px;curs
 input,select,textarea{width:100%;padding:12px;margin-bottom:12px;border-radius:8px;border:none;
 background:#0f1115;color:#fff;outline:none}
 .row{display:flex;gap:10px}
+.qty{width:80px;text-align:center}
 textarea{resize:none;height:80px}
 @media(max-width:900px){
 .checkout-container{flex-direction:column}
@@ -38,21 +38,21 @@ textarea{resize:none;height:80px}
 <h3>🛒 سلة التسوق</h3>
 
 <div class="product">
-<img src="product.jpg">
-<div>
-<div>ANKER R50 NC</div>
-<small>DZD 4,750</small>
-</div>
+<div><strong>ANKER R50 NC</strong></div>
+<div>السعر للوحدة: <strong><span id="unitPrice">4750</span> DZD</strong></div>
 </div>
 
+<label>الكمية المطلوبة</label>
+<input type="number" id="qty" class="qty" min="1" value="1" required oninput="updateTotal()">
+
 <div class="summary">
-<div><span>المجموع</span><span>4750 DZD</span></div>
+<div><span>المجموع</span><span id="subtotal">4750 DZD</span></div>
 <div><span>التوصيل</span><span>0.00</span></div>
-<div class="total"><span>الإجمالي</span><span>4750 DZD</span></div>
+<div class="total"><span>الإجمالي</span><span id="total">4750 DZD</span></div>
 </div>
 
 <input type="hidden" name="product" value="ANKER R50 NC">
-<input type="hidden" name="price" value="4750">
+<input type="hidden" name="price" id="finalPrice" value="4750">
 
 <button class="confirm-btn">تأكيد الطلب</button>
 </div>
@@ -139,3 +139,55 @@ textarea{resize:none;height:80px}
 <select name="payment">
 <option>الدفع عند الاستلام</option>
 </select>
+
+<textarea name="note" placeholder="ملاحظات (اختياري)"></textarea>
+</div>
+
+</div>
+</form>
+
+<script>
+const unitPrice = 4750;
+
+function updateTotal(){
+  const qty = parseInt(document.getElementById('qty').value) || 1;
+  const total = unitPrice * qty;
+
+  document.getElementById('subtotal').innerText = total + " DZD";
+  document.getElementById('total').innerText = total + " DZD";
+  document.getElementById('finalPrice').value = total;
+}
+
+function sendOrder(e){
+  e.preventDefault();
+  const f = e.target;
+  const qty = document.getElementById('qty').value;
+
+  const data = {
+    product: f.product.value,
+    qty: qty,
+    price: f.price.value,
+    name: f.name.value,
+    phone: f.phone.value,
+    wilaya: f.wilaya.value,
+    address: f.address.value,
+    note: f.note.value || ''
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbyHT8Q-0GSRMBaO63gIWlj5bZ2HTNNTdZHMzps14RI5CACYgc4PCx2-mjx2jjARHFmi/exec", {
+    method: "POST",
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    alert("✅ تم تسجيل الطلب بنجاح، سنتصل بك قريبًا");
+    f.reset();
+    updateTotal(); // إعادة تعيين السعر بعد إعادة ضبط الفورم
+  })
+  .catch(() => {
+    alert("❌ حدث خطأ، حاول مرة أخرى");
+  });
+}
+</script>
+
+</body>
+</html>
