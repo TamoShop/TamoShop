@@ -149,14 +149,6 @@ function sendOrder(){
    return;
 }
 
-  
-  const produitSelect = document.getElementById('produit');
-  const produit = produitSelect.value;
-
-  const prixUnitaire = parseInt(produitSelect.selectedOptions[0].dataset.prix);
-  const qte = parseInt(document.getElementById('qte').value);
-  const prix = prixUnitaire * qte;
-
   const urlSheet = "https://script.google.com/macros/s/AKfycbzZbh475Omxj7VfpR3ZsFcUGr72IYR5knXGkRZkWW-BbL0Sy7TL5o5cuYuR9ooRY-uq/exec";
 
   fetch(`${urlSheet}?nom=${encodeURIComponent(nom)}&tel=${encodeURIComponent(tel)}&wilaya=${encodeURIComponent(wilaya)}&livraison=${encodeURIComponent(livraison)}&produit=${encodeURIComponent(produit)}&qte=${qte}&prix=${prix}`)
