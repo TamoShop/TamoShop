@@ -109,30 +109,6 @@ textarea{
 <form onsubmit="sendOrder(event)">
 <div class="checkout-container">
 
-<!-- ===== سلة التسوق ===== -->
-<div class="cart">
-<h3>🛒 سلة التسوق</h3>
-
-<div class="product">
-  <p><strong>ANKER R50 NC</strong></p>
-  <p>السعر للوحدة: <strong>4750 DZD</strong></p>
-</div>
-
-<label>الكمية المطلوبة</label>
-<input type="number" id="qty" class="qty" min="1" value="1" oninput="updateTotal()">
-
-<div class="summary">
-  <div><span>المجموع</span><span id="subtotal">4750 DZD</span></div>
-  <div><span>التوصيل</span><span>0.00</span></div>
-  <div class="total"><span>الإجمالي</span><span id="total">4750 DZD</span></div>
-</div>
-
-<input type="hidden" name="product" value="ANKER R50 NC">
-<input type="hidden" name="price" id="finalPrice" value="4750">
-
-<button class="confirm-btn">تأكيد الطلب</button>
-</div>
-
 <!-- ===== بيانات الزبون ===== -->
 <div class="form">
 <h3>📋 بيانات الزبون</h3>
@@ -206,6 +182,28 @@ textarea{
 <textarea name="note" placeholder="ملاحظات (اختياري)"></textarea>
 </div>
 
+  <!-- ===== سلة التسوق ===== -->
+<div class="cart">
+<h3>🛒 سلة التسوق</h3>
+
+<div class="product">
+  <p><strong>ANKER R50 NC</strong></p>
+  <p>السعر للوحدة: <strong>4750 DZD</strong></p>
+</div>
+
+<label>الكمية المطلوبة</label>
+<input type="number" id="qty" class="qty" min="1" value="1" oninput="updateTotal()">
+
+<div class="summary">
+  <div><span>المجموع</span><span id="subtotal">4750 DZD</span></div>
+  <div><span>التوصيل</span><span>0.00</span></div>
+  <div class="total"><span>الإجمالي</span><span id="total">4750 DZD</span></div>
+</div>
+
+<input type="hidden" name="product" value="ANKER R50 NC">
+<input type="hidden" name="price" id="finalPrice" value="4750">
+
+<button class="confirm-btn">تأكيد الطلب</button>
 </div>
 </form>
 
